@@ -248,7 +248,7 @@ namespace Maokai
             }
             if (qTarget != null && Q.IsReady())
             {
-                if (!qTarget.IsVisible)
+                if (qTarget.IsVisible)
                     Q.Cast(qTarget);
             }
             if (eTarget != null && E.IsReady())
@@ -288,7 +288,7 @@ namespace Maokai
 
             if (qTarget != null && Q.IsReady())
             {
-                if (!qTarget.IsVisible)
+                if (qTarget.IsVisible)
                     Q.Cast(qTarget);
             }
             if (eTarget != null && E.IsReady())
@@ -304,7 +304,7 @@ namespace Maokai
 
             if (qTarget != null && Q.IsReady())
             {
-                if (!qTarget.IsVisible)
+                if (qTarget.IsVisible)
                     Q.Cast(qTarget);
             }
             if (eTarget != null && E.IsReady())

@@ -214,7 +214,7 @@ namespace Maokai
 
         private static void AutoUlt()
         {
-            int inimigos = Utility.CountEnemysInRange(650);
+            int inimigos = int inimigos = Utility.CountEnemysInRange(Player, 650);
 
             var RMana = Config.Item("ManaR").GetValue<Slider>().Value;
             var MPercentR = Player.Mana * 100 / Player.MaxMana;

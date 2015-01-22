@@ -1,12 +1,10 @@
-﻿#region
+#region
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
-using SharpDX;
 using Color = System.Drawing.Color;
 
 #endregion
@@ -69,11 +67,11 @@ namespace Maokai
             Config.AddSubMenu(new Menu("Orbwalking", "Orbwalking"));
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
 
-            Config.AddSubMenu(new Menu("RUsage", "R Usage"));
+            Config.AddSubMenu(new Menu("R Usage", "RUsage"));
             Config.SubMenu("RUsage").AddItem(new MenuItem("UseR", "Use R").SetValue(true));
             Config.SubMenu("RUsage").AddItem(new MenuItem("MinR", "Enemies to use R").SetValue<Slider>(new Slider(3, 1, 5)));
 
-            Config.AddSubMenu(new Menu("ManaManager", "Mana Manager"));
+            Config.AddSubMenu(new Menu("Mana Manager", "ManaManager"));
             Config.SubMenu("ManaManager").AddItem(new MenuItem("ManaHarass", "Don't harass if mana %").SetValue(new Slider(40, 100, 0)));
             Config.SubMenu("ManaManager").AddItem(new MenuItem("ManaR", "% Mana to turn off R").SetValue(new Slider(30, 100, 0)));
             Config.SubMenu("ManaManager").AddItem(new MenuItem("ManaFarm", "Min Mana to Farm").SetValue(new Slider(60, 100, 0)));
@@ -99,7 +97,7 @@ namespace Maokai
             var dmgAfterComboItem = new MenuItem("DamageAfterCombo", "Draw damage after a rotation").SetValue(true);
             Utility.HpBarDamageIndicator.DamageToUnit += hero => (float)(ObjectManager.Player.GetSpellDamage(hero, SpellSlot.Q) + ObjectManager.Player.GetSpellDamage(hero, SpellSlot.W) + ObjectManager.Player.GetSpellDamage(hero, SpellSlot.E) + ObjectManager.Player.GetSpellDamage(hero, SpellSlot.R));
             Utility.HpBarDamageIndicator.Enabled = dmgAfterComboItem.GetValue<bool>();
-            dmgAfterComboItem.ValueChanged += delegate (object sender, OnValueChangeEventArgs eventArgs)
+            dmgAfterComboItem.ValueChanged += delegate(object sender, OnValueChangeEventArgs eventArgs)
             {
                 Utility.HpBarDamageIndicator.Enabled = eventArgs.GetNewValue<bool>();
             };
@@ -117,7 +115,7 @@ namespace Maokai
             Interrupter.OnPossibleToInterrupt += Interrupter_OnPossibleToInterrupt;
 
             Game.PrintChat("<font color=\"#008B8B\">Maokai by B0rslz</font>");
-            Game.PrintChat("If you like this one, leave a feedback infórum");
+            Game.PrintChat("If you like this one, leave a feedback in forum");
 
         }
 
@@ -214,7 +212,9 @@ namespace Maokai
 
         private static void AutoUlt()
         {
-            int inimigos = Utility.CountEnemysInRange(650);
+
+
+            int inimigos = Utility.CountEnemysInRange(Player, 650);
 
             var RMana = Config.Item("ManaR").GetValue<Slider>().Value;
             var MPercentR = Player.Mana * 100 / Player.MaxMana;
